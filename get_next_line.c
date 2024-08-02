@@ -6,7 +6,7 @@
 /*   By: olreshet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:47:23 by olreshet          #+#    #+#             */
-/*   Updated: 2024/08/02 12:40:43 by yourLogin        ###   ########.fr       */
+/*   Updated: 2024/08/02 10:48:20 by olreshet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,11 @@ char	*read_file(int fd, char *buffered_content)
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
 			return (ft_free_buffers(buffer, buffered_content));
-		/*if (byte_read > 0)
+		if (byte_read > 0)
 		{
 			buffer[byte_read] = '\0';
 			buffered_content = ft_strjoin(buffered_content, buffer);
-		}*/
-		buffer[byte_read] = '\0';
-		buffered_content = ft_strjoin(buffered_content, buffer);
-		if (!buffered_content)
-			return (ft_free_buffers(buffer, buffered_content));
+		}
 	}
 	free (buffer);
 	return (buffered_content);
@@ -73,7 +69,7 @@ static char	*ft_get_line(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
-	if (buffer[i] == '\n')
+	if (buffer[i] != '\0')
 		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
@@ -82,35 +78,26 @@ static char	*ft_get_line(char *buffer)
 static char	*ft_clear_buffer(char *buffer, char *line)
 {
 	int		i;
-//	int		j;
+	int		j;
 	char	*rest_of_str;
 
-/*	i = ft_strlen(line);
+	i = ft_strlen(line);
 	j = ft_strlen(buffer);
-*/
-	i = 0;
-/*	if (j - 1 <= 0)
+	if (j - 1 <= 0)
 	{
 		free(buffer);
 		return (NULL);
 	}
 	rest_of_str = malloc(j - i + 1);
-*/
-	//check
-	while (line[i])
-		i++;
-	rest_of_str = ft_strdup(buffer + i);
-	//check
 	if (!rest_of_str)
 	{
 		free (buffer);
 		return (NULL);
 	}
-/*	j = 0;
+	j = 0;
 	while (buffer[i] != '\0')
 		rest_of_str[j++] = buffer[i++];
 	rest_of_str[j] = '\0';
-*/
 	free (buffer);
 	return (rest_of_str);
 }
