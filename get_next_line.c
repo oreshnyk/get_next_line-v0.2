@@ -6,7 +6,7 @@
 /*   By: olreshet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:47:23 by olreshet          #+#    #+#             */
-/*   Updated: 2024/08/01 13:34:01 by olreshet         ###   ########.fr       */
+/*   Updated: 2024/08/02 05:18:16 by olreshet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char	*read_file(int fd, char *buffered_content)
 		if (byte_read > 0)
 		{
 			buffer[byte_read] = '\0';
-			char	*temp = ft_strjoin(buffered_content, buffer);
-			free(buffered_content);
-			buffered_content = temp;
+			buffered_content = ft_strjoin(buffered_content, buffer);
 		}
 	}
 	free (buffer);
