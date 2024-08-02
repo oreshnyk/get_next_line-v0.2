@@ -6,7 +6,7 @@
 /*   By: olreshet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:47:23 by olreshet          #+#    #+#             */
-/*   Updated: 2024/08/02 05:18:16 by olreshet         ###   ########.fr       */
+/*   Updated: 2024/08/02 05:26:35 by olreshet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*read_file(int fd, char *buffered_content)
 		return (NULL);
 	}
 	byte_read = 1;
-	while (byte_read > 0 && (!buffered_content || !ft_strchr(buffered_content, '\n')))
+	while (byte_read > 0 && !ft_strchr(buffered_content, '\n'))
 	{
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
