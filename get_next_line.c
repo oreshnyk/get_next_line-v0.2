@@ -6,7 +6,7 @@
 /*   By: olreshet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:47:23 by olreshet          #+#    #+#             */
-/*   Updated: 2024/08/02 05:26:35 by olreshet         ###   ########.fr       */
+/*   Updated: 2024/08/02 05:51:39 by olreshet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ char	*read_file(int fd, char *buffered_content)
 {
 	char	*buffer;
 	int		byte_read;
-
+	
+	if (!buffered_content)
+		buffered_content = ft_strdup("");
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 	{
@@ -39,7 +41,9 @@ char	*read_file(int fd, char *buffered_content)
 		if (byte_read > 0)
 		{
 			buffer[byte_read] = '\0';
+			char *temp = buffered_content;
 			buffered_content = ft_strjoin(buffered_content, buffer);
+			free(temp);
 		}
 	}
 	free (buffer);
@@ -105,8 +109,15 @@ char	*get_next_line(int fd)
 	static char	*buffer = NULL;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if (buffer)
+		{
+			free(buffer);
+			buffer = NULL;
+		}
 		return (NULL);
+	}
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
