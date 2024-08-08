@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olreshet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 17:47:13 by olreshet          #+#    #+#             */
-/*   Updated: 2024/08/02 10:55:54 by olreshet         ###   ########.fr       */
+/*   Created: 2024/08/03 22:44:46 by olreshet          #+#    #+#             */
+/*   Updated: 2024/08/04 00:28:29 by olreshet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -61,8 +61,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j] != '\0')
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	free((void *)s1);
-	return (str);
+	return (free((void *)s1), str);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
@@ -90,7 +89,7 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 
 	len = ft_strlen(s1) + 1;
-	dup = (char *)malloc(len);
+	dup = (char *)malloc(len * sizeof(char));
 	if (dup == NULL)
 		return (NULL);
 	ft_strlcpy(dup, s1, len);
